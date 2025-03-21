@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamothe Properties | Spectra Enterprises - Real Estate Dealer in Kamothe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #dbdbdb);
+        }
+        
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 40px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .slideshow {
+            position: absolute;
+            width: 100%;
+            height: 95%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .slideshow img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .slideshow img.active {
+            opacity: 1;
+        }
+        .text-overlay {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .form-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        transition: box-shadow 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .animate-checkmark {
+            animation: pop-in 0.5s ease-in-out;
+        }
+
+        @keyframes pop-in {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (min-width: 1024px) { /* Only for large screens (PC, Laptop) */
+            header {
+                position: sticky;
+                top: 0;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 50;
+            }
+        }
+
+        @media (max-width: 1023px) { /* For tablets & mobiles */
+            html, body {
+                background: linear-gradient(to right, #dbdbdb);
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                margin: 0;
+                padding: 5px;
+            }
+
+            header {
+                position: relative; /* Normal flow on mobile */
+                box-shadow: none;
+            }
+
+            #navbar {
+                visibility: hidden;
+                width: 2%;
+            }
+        }
+
+        </style>
+</head>
+<body class="w-full bg-gray-200 py-2">
+    
+    <header class="max-w-5xl mx-auto w-full bg-[#9c7e2c] text-white shadow-md py-4 px-6 flex justify-between items-center top-0 left-0 z-50 mb-2">
+        <div>
+            <h1 class="text-2xl font-bold">KAMOTHE PROPERTIES</h1>
+            <p class="text-sm">Spectra Enterprises | Phone: +91 9321795663 | Email: spectraente@gmail.com</p>
+        </div>
+        <nav id="navbar">
+            <ul class="flex space-x-6">
+                <li><a href="" class="hover:text-blue-300">Home</a></li>
+                <li><a href="#leadFormSection" class="hover:text-blue-300">Get Started</a></li>
+                <li><a href="#aboutUs" class="hover:text-blue-300">About Us</a></li>
+            </ul>
+        </nav>
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-yellow-600">
+            <a href="tel:+919321795663">Call Now</a></button>
+    </header>
+
+    <!-- Property Listings Section -->
+    <section class="max-w-5xl mx-auto p-6 bg-white container py-10 rounded-xl mb-8 shadow-lg border border-gray-20">
+        <h2 class="text-3xl sm:text-4xl md:text-4xl font-bold text-center mb-8 text-gray-900">Properties in Kamothe</h2>
+
+        <!-- Available Properties -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                <span class="text-green-500 text-2xl md:text-3xl sm:text-3xl mr-2">✔️</span> Available Properties For Rent
+            </h3>
+            <div id="availableContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+            </div>
+        </div>
+    
+        <!-- Required Properties -->
+        <div>
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                <span class="text-red-500 text-3xl mr-2">❗</span> Required Properties For Rent
+            </h3>
+            <div id="requiredContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+            </div>
+        </div>
+
+        <!-- Contact Us Section -->
+        <div class="mt-12 text-center">
+            <p class="text-lg text-gray-700 mb-8">Contact us for any inquiries or property listings. We’ll help you find the best deal in Kamothe!</p>
+            <a href="tel:+919321795663" class="px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-lg transition text-lg font-semibold">
+                Contact Us
+            </a>
+        </div>
+    </section>
+
+    <!-- Lead Form Section -->
+    <div id="leadFormSection" class="max-w-5xl mx-auto p-8 bg-white shadow-lg rounded-2xl mb-10 border border-gray-200">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">List your own property (Available / Required) in Kamothe</h2>
+        <p class="text-center text-gray-600 mb-6">Fill out the form below to connect with property owners or tenants.</p>
+
+        <form id="leadForm" class="space-y-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" name="name" placeholder="Your Full Name" class="form-input" required>
+                <input type="text" name="phone" placeholder="Your Phone Number" class="form-input" required>
+            </div>
+            
+            <!-- Availability Dropdown -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <select name="availability" id="availability" class="form-input" required>
+                    <option value="">Available or Required?</option>
+                    <option value="Available">Available</option>
+                    <option value="Required">Required</option>
+                </select>
+            </div>
+
+            <!-- Property Type and Tenant/Owner -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <select name="tenantOwner" class="form-input">
+                    <option value="">Are you a Tenant or Owner?</option>
+                    <option value="Tenant">Tenant</option>
+                    <option value="Owner">Owner</option>
+                </select>
+                <select name="propertyType" class="form-input" required>
+                    <option value="">Property Type</option>
+                    <option value="1rk">1 RK</option>
+                    <option value="1bhk">1 BHK</option>
+                    <option value="2bhk">2 BHK</option>
+                    <option value="3bhk">3 BHK</option>
+                    <option value="Shop">Shop</option>
+                </select>
+            </div>
+
+            <!-- Conditional Fields: Only for "Available" -->
+            <div id="availableFields" class="hidden space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="location" placeholder="Sector :" class="form-input">
+                    <input type="text" name="floor" placeholder="Floor :" class="form-input">
+                    <select name="furnishedUnfurnished" class="form-input">
+                        <option value="">Furnished / Unfurnished</option>
+                        <option value="Furnished">Furnished</option>
+                        <option value="Semi-Furnished">Semi-Furnished</option>
+                        <option value="Unfurnished">Unfurnished</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="rent" placeholder="Expected Rent (₹)" class="form-input">
+                    <input type="text" name="deposit" placeholder="Security Deposit (₹)" class="form-input">
+                </div>
+                <fieldset class="border border-gray-300 p-4 rounded-lg">
+                    <legend class="text-gray-700 font-semibold">Amenities</legend>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                        <label><input type="checkbox" name="amenities" value="Parking"> Parking</label>
+                        <label><input type="checkbox" name="amenities" value="Lift"> Lift</label>
+                        <label><input type="checkbox" name="amenities" value="Security"> Security</label>
+                        <label><input type="checkbox" name="amenities" value="Power Backup"> Power Backup</label>
+                        <label><input type="checkbox" name="amenities" value="Water Supply"> Water Supply</label>
+                    </div>
+                </fieldset>
+                <textarea name="additionalNotes" placeholder="Additional Notes (Optional)" class="form-input"></textarea>
+            </div>
+
+            <!-- Conditional Fields: Only for "Required" -->
+            <div id="requiredFields" class="hidden space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="budget" placeholder="Budget (₹)" class="form-input">
+                    <input type="text" name="preferredFloor" placeholder="Preferred Floor (if any)" class="form-input">
+                    <select name="preferredFurnished" class="form-input">
+                        <option value="">Furnished / Unfurnished</option>
+                        <option value="Furnished">Furnished</option>
+                        <option value="Semi-Furnished">Semi-Furnished</option>
+                        <option value="Unfurnished">Unfurnished</option>
+                    </select>
+                </div>
+                <fieldset class="border border-gray-300 p-4 rounded-lg">
+                    <legend class="text-gray-700 font-semibold">Required Amenities</legend>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                        <label><input type="checkbox" name="requiredAmenities" value="Parking"> Parking</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Lift"> Lift</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Security"> Security</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Power Backup"> Power Backup</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Water Supply"> Water Supply</label>
+                    </div>
+                </fieldset>
+                <textarea name="additionalNotes" placeholder="Additional Notes (Optional)" class="form-input"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg text-lg font-semibold shadow-md hover:bg-blue-700 transition duration-300">Submit</button>
+        </form>
+
+        <!-- Success Message with Animation -->
+        <div id="successMessage" class="hidden flex items-center justify-center mt-6 opacity-0 transition-opacity duration-500">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-3 rounded-lg shadow-md flex items-center space-x-3">
+                <svg class="w-6 h-6 text-green-600 animate-checkmark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <p class="text-lg font-medium">Thanks for submitting! We will show your listing soon</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto hero w-full flex flex-col items-center justify-center text-center">
+        <div class="slideshow">
+            <img src="bg1.jpg" class="active" alt="Real Estate">
+            <img src="bg2.jpg" alt="Apartments">
+            <img src="bg3.jpg" alt="Villas">
+            <img src="bg4.jpg" alt="Villas">
+            <img src="bg5.jpg" alt="Villas">
+        </div>
+        <div class="max-w-4xl mx-auto p-6 shadow-md rounded-xl text-overlay sm:p-10">
+            <h1 class="text-4xl font-bold">Find Your Perfect Property in Kamothe</h1>
+            <p class="text-lg mt-4">Connecting tenants and owners for the best real estate deals.</p>
+            <button onclick="document.getElementById('leadFormSection').scrollIntoView({ behavior: 'smooth' });" 
+                    class="mt-6 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-200">
+                Get Started
+            </button>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <div id="aboutUs" class="max-w-5xl mx-auto w-full flex flex-col items-center justify-center text-center mb-10">
+        <h2 class="text-5xl font-bold text-white mb-6">About Us</h2>
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-5xl mx-auto">
+            <p class="text-gray-700 text-lg">
+                We are a dedicated real estate hub located in Kamothe, Navi Mumbai, connecting property seekers and owners in the Kamothe region. 
+                Whether you are looking for rent, we help you find the best deals effortlessly.
+            </p>
+            <h3 class="text-2xl font-semibold text-blue-600 mt-6">Our Mission</h3>
+            <p class="text-gray-700 text-lg">
+                Our mission is to make property transactions seamless, transparent, and accessible to everyone. 
+                We aim to create a reliable space where property seekers and owners can connect with ease.
+            </p>
+
+            <h3 class="text-2xl font-semibold text-blue-600 mt-6">Get in Touch</h3>
+            <p class="text-gray-700 text-lg">
+                Have any questions? Reach out to us!
+            </p>
+            <p class="text-gray-700 text-lg mt-2">
+                📞 Phone: <a href="tel:+919321795663" class="text-blue-500 hover:underline">+91 9321795663</a> <br>
+                📧 Email: <a href="mailto:spectraente@gmail.com" class="text-blue-500 hover:underline">spectraente@gmail.com</a>
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Why Choose This Location? Start -->
+    <div class="max-w-5xl p-6 bg-white container mx-auto py-10 rounded-xl">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <h1 class="text-4xl font-bold mb-3">Why Choose Kamothe?</h1>
+            <p class="text-lg text-gray-700">Discover the benefits of living or investing in one of the fastest-growing real estate hubs.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="p-6 bg-white shadow-lg rounded-lg text-center">
+                <h4 class="text-xl font-semibold mb-2">Excellent Connectivity</h4>
+                <p class="text-gray-600 text-sm">Close to highways, railways, and upcoming metro.</p>
+            </div>
+
+            <div class="p-6 bg-white shadow-lg rounded-lg text-center">
+                <h4 class="text-xl font-semibold mb-2">Top Educational Institutions</h4>
+                <p class="text-gray-600 text-sm">Renowned schools, colleges, and coaching centers nearby.</p>
+            </div>
+
+            <div class="p-6 bg-white shadow-lg rounded-lg text-center">
+                <h4 class="text-xl font-semibold mb-2">Shopping & Entertainment</h4>
+                <p class="text-gray-600 text-sm">Malls, multiplexes, and local markets within reach.</p>
+            </div>
+
+            <div class="p-6 bg-white shadow-lg rounded-lg text-center">
+                <h4 class="text-xl font-semibold mb-2">Advanced Healthcare</h4>
+                <p class="text-gray-600 text-sm">Hospitals and medical facilities just minutes away.</p>
+            </div>
+
+            <div class="p-6 bg-white shadow-lg rounded-lg text-center">
+                <h4 class="text-xl font-semibold mb-2">High Investment Potential</h4>
+                <p class="text-gray-600 text-sm">Rapidly developing area with rising property value.</p>
+            </div>
+
+            <div class="p-6 bg-white shadow-lg rounded-lg text-center">
+                <h4 class="text-xl font-semibold mb-2">Green & Peaceful Environment</h4>
+                <p class="text-gray-600 text-sm">Low pollution, open spaces, and a calm atmosphere.</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-10">
+            <a href="tel:+919321795663" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-blue-700 transition">
+                Contact Us
+            </a>
+        </div>
+    </div>
+    <!-- Why Choose This Location? End -->
+
+
+    <!-- Footer Section -->
+    <footer class="max-w-5xl mx-auto bg-gray-900 text-white py-6 mt-10">
+        <div class="container mx-auto flex flex-col items-center">
+            <h3 class="text-2xl font-semibold mb-4">Connect With Us</h3>
+            
+            <!-- Social Media Links with Images -->
+            <div class="flex space-x-6">
+                <a href="https://www.facebook.com/spectraente" target="_blank">
+                    <img src="communication.png" alt="Facebook" class="w-10 h-10 hover:opacity-80 transition">
+                </a>
+                <a href="https://wa.me/919321795663" target="_blank">
+                    <img src="whatsapp.png" alt="WhatsApp" class="w-10 h-10 hover:opacity-80 transition">
+                </a>
+            </div>
+
+            <p class="text-gray-400 text-sm mt-4">© 2025 Spectra Enterprises. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const aboutUsSection = document.getElementById("aboutUs");
+            const fadeInElements = aboutUsSection.querySelectorAll(".fade-in");
+
+            function checkScroll() {
+                let sectionTop = aboutUsSection.getBoundingClientRect().top;
+                let screenPosition = window.innerHeight / 1.3;
+                
+                if (sectionTop < screenPosition) {
+                    fadeInElements.forEach(el => el.classList.add("visible"));
+                }
+            }
+
+            window.addEventListener("scroll", checkScroll);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const slides = document.querySelectorAll(".slideshow img");
+            let currentSlide = 0;
+
+            function showNextSlide() {
+                slides[currentSlide].classList.remove("active");
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add("active");
+            }
+            setInterval(showNextSlide, 7000);
+        });
+
+        document.getElementById("availability").addEventListener("change", function () {
+        let availableFields = document.getElementById("availableFields");
+        let requiredFields = document.getElementById("requiredFields");
+        
+        if (this.value === "Available") {
+            availableFields.classList.remove("hidden");
+            requiredFields.classList.add("hidden");
+        } else if (this.value === "Required") {
+            availableFields.classList.add("hidden");
+            requiredFields.classList.remove("hidden");
+        } else {
+            availableFields.classList.add("hidden");
+            requiredFields.classList.add("hidden");
+        }
+        });
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const leadForm = document.getElementById("leadForm");
+            const successMessage = document.getElementById("successMessage");
+            const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyhDplfKvVt9I52nTUVhp_YjFxc1Ts3_2uxqC8hWjcaCcuyoBS4FmhWL7n_vN68rWpVig/exec";
+
+
+            // Fetch and display properties
+            fetch(GOOGLE_SHEET_WEBHOOK_URL)
+            .then(response => response.json())
+            .then(data => {
+                displayProperties(data.available, "availableContainer");
+                displayProperties(data.required, "requiredContainer");
+            })
+            .catch(error => console.error("Error fetching data:", error));
+
+            function displayProperties(properties, containerId) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = "";
+
+                if (properties.length === 0) {
+                    container.innerHTML = "<p class='text-gray-500'>No listings available</p>";
+                    return;
+                }
+
+                properties.forEach(property => {
+                    const propertyDiv = document.createElement("div");
+
+                    if(property.availability === "Available"){
+                        propertyDiv.classList.add("p-6", "border", "border-green-400", "rounded-xl", "shadow-lg", "bg-white", "hover:shadow-xl", "transition");
+
+                        propertyDiv.innerHTML = `
+                            <a href="tel:+919321795663">
+                                <h3 class="text-xl font-bold text-gray-800">${property.propertyType} Apartment</h3>
+                                <ul class="text-gray-600 text-sm list-disc pl-4">
+                                    <li>Furnished: ${property.furnishedUnfurnished || "Not Specified"}</li>
+                                    <li>Amenities: ${property.amenities}</li>
+                                    <li>Floor: ${property.floor || "Not specified"}</li>
+                                </ul>
+                                <p class="mt-2 text-gray-600">Sector: ${property.sector || "Not Specified"}</p>
+                                <p class="text-green-600 font-semibold text-lg">Rent: ₹${property.rent || "-"}/month</p>
+                            </a>
+                        `;
+                    }
+                    else {
+                        propertyDiv.classList.add("p-6", "border", "border-red-400", "rounded-xl", "shadow-lg", "bg-white", "hover:shadow-xl", "transition");
+
+                        propertyDiv.innerHTML = `
+                            <a href="tel:+919321795663">
+                                <h3 class="text-xl font-bold text-gray-800 mb-4">Looking for ${property.propertyType} Flat</h3>
+                                <ul class="text-gray-600 text-sm list-disc pl-4">
+                                    <li>Furnished: ${property.furnishedUnfurnished || "Not Specified"}</li>
+                                    <li>Preferred Amenities: ${property.amenities || "Not Specified"}</li>
+                                    <li>Preferred Floor: ${property.floor || "Not specified"}</li>
+                                </ul>
+                                <p class="text-red-600 font-semibold text-lg">Budget: ₹${property.budget || "-"}</p>
+                            </a>
+                        `;
+                    }
+
+                    container.appendChild(propertyDiv);
+                });
+            }
+
+
+            leadForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(leadForm);
+                const availability = formData.get("availability");
+
+                const propertyData = {
+                    name: formData.get("name"),
+                    phone: formData.get("phone"),
+                    availability,
+                    tenantOwner: formData.get("tenantOwner") || "",
+                    propertyType: formData.get("propertyType"),
+                    ...(availability === "Required"
+                        ? {
+                            budget: formData.get("budget") || "",
+                            preferredFloor: formData.get("preferredFloor") || "",
+                            preferredFurnished: formData.get("preferredFurnished") || "",
+                            requiredAmenities: formData.getAll("requiredAmenities").length > 0 ? formData.getAll("requiredAmenities") : [],
+                        }
+                        : {
+                            location: formData.get("location") || "",
+                            floor: formData.get("floor") || "",
+                            rent: formData.get("rent") || "",
+                            furnishedUnfurnished: formData.get("furnishedUnfurnished") || "",
+                            deposit: formData.get("deposit") || "",
+                            amenities: formData.getAll("amenities").length > 0 ? formData.getAll("amenities") : [],
+                        }),
+                };
+
+                // Send data to Google Sheets
+                fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(propertyData)
+                });
+                
+
+                // Reset form
+                leadForm.reset();
+
+                // Show success message
+                successMessage.classList.remove("hidden");
+                successMessage.classList.add("opacity-100");
+                setTimeout(() => {
+                    successMessage.classList.add("opacity-0");
+                    setTimeout(() => successMessage.classList.add("hidden"), 500);
+                }, 2000);
+            });
+        });
+
+
+    </script>
+</body>
+</html>
