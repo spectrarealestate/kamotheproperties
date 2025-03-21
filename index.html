@@ -436,7 +436,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const leadForm = document.getElementById("leadForm");
             const successMessage = document.getElementById("successMessage");
-            const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyhDplfKvVt9I52nTUVhp_YjFxc1Ts3_2uxqC8hWjcaCcuyoBS4FmhWL7n_vN68rWpVig/exec";
+            const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzlBRfHFIUKDf6vRY08Y587hZgmkqmYtYxp_F0-mnpOen-yBVEK5J3ri46D4kh-PHNwsw/exec";
 
 
             // Fetch and display properties
@@ -451,6 +451,7 @@
             function displayProperties(properties, containerId) {
                 const container = document.getElementById(containerId);
                 container.innerHTML = "";
+                let phoneNumber = "919321795663";  // Your WhatsApp number
 
                 if (properties.length === 0) {
                     container.innerHTML = "<p class='text-gray-500'>No listings available</p>";
@@ -463,8 +464,17 @@
                     if(property.availability === "Available"){
                         propertyDiv.classList.add("p-6", "border", "border-green-400", "rounded-xl", "shadow-lg", "bg-white", "hover:shadow-xl", "transition");
 
+                        let message1 = `Hello, I'm interested in this property (ID: ${property.id}).\n` +
+                                    `Property Type: ${property.propertyType}\n` +
+                                    `Sector: ${property.sector}\n` +
+                                    `Rent: ₹${property.rent}\n` +
+                                    `Furnished: ${property.furnishedUnfurnished}\n` +
+                                    `Amenities: ${property.amenities}\n` +
+                                    `Please share more details.`;
+
+                        let url1 = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message1)}`;
+
                         propertyDiv.innerHTML = `
-                            <a href="tel:+919321795663">
                                 <h3 class="text-xl font-bold text-gray-800">${property.propertyType} Apartment</h3>
                                 <ul class="text-gray-600 text-sm list-disc pl-4">
                                     <li>Furnished: ${property.furnishedUnfurnished || "Not Specified"}</li>
@@ -472,28 +482,42 @@
                                     <li>Floor: ${property.floor || "Not specified"}</li>
                                 </ul>
                                 <p class="mt-2 text-gray-600">Sector: ${property.sector || "Not Specified"}</p>
-                                <p class="text-green-600 font-semibold text-lg">Rent: ₹${property.rent || "-"}/month</p>
-                            </a>
+                                <p class="text-green-600 font-semibold text-lg mb-4">Rent: ₹${property.rent || "-"}/month</p>
+
+                                <a href=${url1} target="_blank">
+                                    <button class="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
+                                        Contact on WhatsApp
+                                        </button>
+                                </a>
                         `;
+
                     }
                     else {
                         propertyDiv.classList.add("p-6", "border", "border-red-400", "rounded-xl", "shadow-lg", "bg-white", "hover:shadow-xl", "transition");
 
+                        let message2 = `Hello, I have a ${property.propertyType} flat available for rent in Kamothe.\n\n📍 Sector: \n💰 Rent: \nPlease let me know if you're interested.`;
+
+                        let url2 = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message2)}`;
+
                         propertyDiv.innerHTML = `
-                            <a href="tel:+919321795663">
-                                <h3 class="text-xl font-bold text-gray-800 mb-4">Looking for ${property.propertyType} Flat</h3>
-                                <ul class="text-gray-600 text-sm list-disc pl-4">
-                                    <li>Furnished: ${property.furnishedUnfurnished || "Not Specified"}</li>
-                                    <li>Preferred Amenities: ${property.amenities || "Not Specified"}</li>
-                                    <li>Preferred Floor: ${property.floor || "Not specified"}</li>
-                                </ul>
-                                <p class="text-red-600 font-semibold text-lg">Budget: ₹${property.budget || "-"}</p>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Looking for ${property.propertyType} Flat</h3>
+                            <ul class="text-gray-600 text-sm list-disc pl-4">
+                                <li>Furnished: ${property.furnishedUnfurnished || "Not Specified"}</li>
+                                <li>Preferred Amenities: ${property.amenities || "Not Specified"}</li>
+                                <li>Preferred Floor: ${property.floor || "Not specified"}</li>
+                            </ul>
+                            <p class="text-red-600 font-semibold text-lg mb-4">Budget: ₹${property.budget || "-"}</p>
+                            <a href=${url2} target="_blank">
+                                <button class="flex items-center justify-center gap-2 bg-red-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
+                                    Send Property Details
+                                </button>
                             </a>
                         `;
                     }
 
                     container.appendChild(propertyDiv);
                 });
+
             }
 
 
