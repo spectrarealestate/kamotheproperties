@@ -502,9 +502,9 @@
                         propertyDiv.innerHTML = `
                             <h3 class="text-xl font-bold text-gray-800 mb-4">Looking for ${property.propertyType} Flat</h3>
                             <ul class="text-gray-600 text-sm list-disc pl-4">
-                                <li>Furnished: ${property.furnishedUnfurnished || "Not Specified"}</li>
-                                <li>Preferred Amenities: ${property.amenities || "Not Specified"}</li>
-                                <li>Preferred Floor: ${property.floor || "Not specified"}</li>
+                                <li>Furnished: ${property.preferredFurnished || "Not Specified"}</li>
+                                <li>Preferred Amenities: ${property.requiredAmenities || "Not Specified"}</li>
+                                <li>Preferred Floor: ${property.preferredFloor || "Not specified"}</li>
                             </ul>
                             <p class="text-red-600 font-semibold text-lg mb-4">Budget: ₹${property.budget || "-"}</p>
                             <a href=${url2} target="_blank">
