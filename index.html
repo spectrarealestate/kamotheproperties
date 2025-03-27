@@ -3,11 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Kamothe Properties - Spectra Enterprises | Real Estate Dealer in Kamothe">
-    <meta property="og:description" content="Kamothe owners and tenants can now post their property and requirements for FREE!, and we will connect you with suitable options, Visit Now!">
-    <meta property="og:image" content="https://imgur.com/a/87clufG">
-    <meta property="og:url" content="https://spectrarealestate.github.io/kamotheproperties/">
-    <meta property="og:type" content="website">
     <title>Kamothe Properties | Spectra Enterprises - Real Estate Dealer in Kamothe</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -77,6 +72,20 @@
 
         .animate-checkmark {
             animation: pop-in 0.5s ease-in-out;
+        }
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-top-color: #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes pop-in {
@@ -152,7 +161,7 @@
                 <span class="text-green-500 text-2xl md:text-3xl sm:text-3xl mr-2">✔️</span> Available Properties For Rent in Kamothe
             </h3>
             <div id="availableContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
+                <div class="loader"></div>
             </div>
         </div>
     
@@ -162,7 +171,7 @@
                 <span class="text-red-500 text-3xl mr-2">❗</span> Required Properties For Rent in Kamothe
             </h3>
             <div id="requiredContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    
+                <div class="loader"></div>
             </div>
         </div>
 
@@ -182,7 +191,7 @@
 
         <form id="leadForm" class="space-y-5">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="text" name="name" placeholder="Your Full Name" class="form-input" required>
+                <input type="text" name="name" placeholder="Your Name" class="form-input" required>
                 <input type="text" name="phone" placeholder="Your Phone Number" class="form-input" required>
             </div>
             
@@ -198,16 +207,21 @@
             <!-- Property Type and Tenant/Owner -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <select name="tenantOwner" class="form-input">
-                    <option value="">Are you a Tenant or Owner?</option>
+                    <option value="">Are you a Tenant/Owner/Agent?</option>
                     <option value="Tenant">Tenant</option>
                     <option value="Owner">Owner</option>
+                    <option value="Agent">Agent</option>
                 </select>
                 <select name="propertyType" class="form-input" required>
                     <option value="">Property Type</option>
-                    <option value="1rk">1 RK</option>
-                    <option value="1bhk">1 BHK</option>
-                    <option value="2bhk">2 BHK</option>
-                    <option value="3bhk">3 BHK</option>
+                    <option value="1 RK">1 RK</option>
+                    <option value="1 BHK">1 BHK</option>
+                    <option value="2 BHK">2 BHK</option>
+                    <option value="3 BHK">3 BHK</option>
+                    <option value="4 BHK">4 BHK</option>
+                    <option value="Duplex">Duplex</option>
+                    <option value="Row House">Row House</option>
+                    <option value="Office Space">Office Space</option>
                     <option value="Shop">Shop</option>
                 </select>
             </div>
@@ -235,7 +249,12 @@
                         <label><input type="checkbox" name="amenities" value="Lift"> Lift</label>
                         <label><input type="checkbox" name="amenities" value="Security"> Security</label>
                         <label><input type="checkbox" name="amenities" value="Power Backup"> Power Backup</label>
-                        <label><input type="checkbox" name="amenities" value="Water Supply"> Water Supply</label>
+                        <label><input type="checkbox" name="amenities" value="24 HRS Water Supply"> 24 HRS Water Supply</label>
+                        <label><input type="checkbox" name="amenities" value="Modular Kitchen"> Modular Kitchen</label>
+                        <label><input type="checkbox" name="amenities" value="Gas Pipeline"> Gas Pipeline</label>
+                        <label><input type="checkbox" name="amenities" value="Western Toilet"> Western Toilet</label>
+                        <label><input type="checkbox" name="amenities" value="Gym"> Gym</label>
+                        <label><input type="checkbox" name="amenities" value="Swimming Pool"> Swimming Pool</label>
                     </div>
                 </fieldset>
                 <textarea name="additionalNotes" placeholder="Additional Notes (Optional)" class="form-input"></textarea>
@@ -260,7 +279,12 @@
                         <label><input type="checkbox" name="requiredAmenities" value="Lift"> Lift</label>
                         <label><input type="checkbox" name="requiredAmenities" value="Security"> Security</label>
                         <label><input type="checkbox" name="requiredAmenities" value="Power Backup"> Power Backup</label>
-                        <label><input type="checkbox" name="requiredAmenities" value="Water Supply"> Water Supply</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="24 HRS Water Supply"> 24 HRS Water Supply</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Modular Kitchen"> Modular Kitchen</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Gas Pipeline"> Gas Pipeline</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Western Toilet"> Western Toilet</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Gym"> Gym</label>
+                        <label><input type="checkbox" name="requiredAmenities" value="Swimming Pool"> Swimming Pool</label>
                     </div>
                 </fieldset>
                 <textarea name="additionalNotes" placeholder="Additional Notes (Optional)" class="form-input"></textarea>
@@ -482,12 +506,12 @@
                         propertyDiv.innerHTML = `
                                 <h3 class="text-xl font-bold text-gray-800">${property.propertyType} Available</h3>
                                 <ul class="text-gray-600 text-sm list-disc pl-4">
-                                    <li>Furnished: ${property.furnishedUnfurnished || "Not Specified"}</li>
-                                    <li>Amenities: ${property.amenities}</li>
-                                    <li>Floor: ${property.floor || "Not specified"}</li>
+                                    <li>${property.furnishedUnfurnished || "Furnished : Not Specified"}</li>
+                                    <li>Amenities : ${property.amenities}</li>
                                 </ul>
                                 <p class="mt-2 text-gray-600">Sector: ${property.sector || "Not Specified"}</p>
-                                <p class="text-green-600 font-semibold text-lg mb-4">Rent: ₹${property.rent || "-"}/month</p>
+                                <p class="text-green-600 font-semibold text-lg">Rent : ₹${property.rent || "-"}/month</p>
+                                <p class="text-green-600 font-semibold text-lg mb-2">Deposit : ₹${property.deposit || "-"}</p>
 
                                 <a href=${url1} target="_blank">
                                     <button class="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
@@ -507,11 +531,10 @@
                         propertyDiv.innerHTML = `
                             <h3 class="text-xl font-bold text-gray-800 mb-4">Looking for ${property.propertyType}</h3>
                             <ul class="text-gray-600 text-sm list-disc pl-4">
-                                <li>Furnished: ${property.preferredFurnished || "Not Specified"}</li>
-                                <li>Preferred Amenities: ${property.requiredAmenities || "Not Specified"}</li>
-                                <li>Preferred Floor: ${property.preferredFloor || "Not specified"}</li>
+                                <li>${property.preferredFurnished || "Furnished : Not Specified"}</li>
+                                <li>Preferred Amenities : ${property.requiredAmenities}</li>
                             </ul>
-                            <p class="text-red-600 font-semibold text-lg mb-4">Budget: ₹${property.budget || "-"}</p>
+                            <p class="text-red-600 font-semibold text-lg mb-4">Budget : ₹${property.budget || "-"}</p>
                             <a href=${url2} target="_blank">
                                 <button class="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
                                     Send Property Details
